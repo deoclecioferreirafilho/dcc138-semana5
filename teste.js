@@ -1,3 +1,4 @@
-function name(params) {
+function teste() {
+console.log('Ola mundo!!!')
     
 }
