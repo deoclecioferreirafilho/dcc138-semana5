@@ -1,12 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Semana 05</title>
+    <script src="InputController.js"></script>
 </head>
+
 <body>
-    
+    <h1>Semana 05</h1>
+    <canvas></canvas>
+    <script>
+        var canvas = document.querySelector("canvas");
+        canvas.width = 600;
+        canvas.height = 400;
+        var ctx = canvas.getContext("2d");
+        var dt, anterior = 0;
+        var input = new InputController();
+        input.setupKeyboard([
+            { nome: "espaço", codigo: 32 },
+            { nome: "esquerda", codigo: 37 },
+            { nome: "cima", codigo: 38 },
+            { nome: "direita", codigo: 39 },
+            { nome: "baixo", codigo: 40 },
+            { nome: "a", codigo: 65 },
+            { nome: "w", codigo: 87 },
+            { nome: "d", codigo: 68 },
+            { nome: "s", codigo: 83 },
+        ]);
+
+        input.setupJoysticks();
+
+        function passo(t) {
+            dt = (t - anterior) / 1000;
+            ctx.fillStyle = "green";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "yellow";
+            ctx.font = "20px sans-serif";
+            ctx.fillText((1/dt).toFixed(2), 10, 20);
+
+            for (var nome in input.teclas){
+                var tecla = input.teclas[nome];
+                ctx.filltext(`${nome}: ${input.teclas[nome]}`,10,20*l++)
+            }
+
+            requestAnimationFrame(passo);
+            anterior = t;
+        }
+    </script>
 </body>
+
 </html>
